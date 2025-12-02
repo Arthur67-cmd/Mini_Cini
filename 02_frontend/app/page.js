@@ -103,7 +103,7 @@ export default function Page() {
     <main className="container">
       <header className="header">
         <h1 className="title">🎬 Mini_Cini</h1>
-        <p className="subtitle">Your Personal Movie Watchlist</p>
+        <p className="subtitle">Your Personal Movie Watchlist-by Arthur</p>
         <div className="stats">
           <span>Total: {movies.length}</span>
           <span>Watched: {watchedMovies.length}</span>
