@@ -1,0 +1,19 @@
+# Environment
+.env
+
+# Node modules
+node_modules/
+01_api/node_modules/
+02_frontend/node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Next.js
+02_frontend/.next/
+02_frontend/out/
+
+# OS
+.DS_Store
+Thumbs.db
