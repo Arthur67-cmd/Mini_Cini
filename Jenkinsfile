@@ -2,12 +2,12 @@ pipeline {
     agent any
     
     triggers {
-        // Poll SCM every 2 minutes as fallback if webhook fails
+
         pollSCM('H/2 * * * *')
     }
     
     environment {
-        // Build Information
+        
         BUILD_TAG = "${env.BUILD_NUMBER}"
         GIT_COMMIT_SHORT = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
     }
@@ -50,13 +50,12 @@ pipeline {
             steps {
                 script {
                     echo "⚙️  Preparing environment configuration..."
-                    
-                    // Load credentials from Jenkins
+
                     withCredentials([
                         string(credentialsId: 'MYSQL_ROOT_PASSWORD', variable: 'MYSQL_ROOT_PASS'),
                         string(credentialsId: 'MYSQL_PASSWORD', variable: 'MYSQL_PASS')
                     ]) {
-                        // Create .env file
+
                         sh """
                             cat > .env <<EOF
 MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASS}
@@ -87,16 +86,14 @@ EOF
             steps {
                 script {
                     echo "🚀 Deploying Mini_Cini using Docker Compose..."
-                    
-                    // Stop existing containers
+
                     def downCommand = 'docker compose down'
                     if (params.CLEAN_VOLUMES) {
                         echo "⚠️  WARNING: Removing volumes (database will be cleared)"
                         downCommand = 'docker compose down -v'
                     }
                     sh downCommand
-                    
-                    // Build and start services
+
                     sh """
                         docker compose build --no-cache
                         docker compose up -d
